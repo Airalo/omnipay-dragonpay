@@ -11,7 +11,6 @@ abstract class DragonpayAbstractRequest extends AbstractRequest
         return $this->setParameter('merchantId', $value);
     }
 
-
     public function getMerchantId()
     {
         return $this->getParameter('merchantId');
