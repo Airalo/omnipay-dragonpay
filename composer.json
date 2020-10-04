@@ -1,5 +1,5 @@
 {
-    "name": "sethsahin/omnipay-dragonpay",
+    "name": "airalo/omnipay-dragonpay",
     "type": "library",
     "description": "Dragonpay driver for omnipay",
     "keywords": [
