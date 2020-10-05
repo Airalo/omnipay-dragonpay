@@ -26,4 +26,9 @@ class DragonpayCompletePurchaseResponse extends AbstractResponse
     {
         return $this->data['refno'];
     }
+
+    public function getMessage()
+    {
+        return $this->data['message'];
+    }
 }
