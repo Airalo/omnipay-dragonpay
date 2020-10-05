@@ -7,12 +7,13 @@ use Omnipay\Common\AbstractGateway;
 /**
  * @method \Omnipay\Common\Message\RequestInterface completeAuthorize(array $options = array())
  * @method \Omnipay\Common\Message\RequestInterface capture(array $options = array())
- * @method \Omnipay\Common\Message\RequestInterface completePurchase(array $options = array())
  * @method \Omnipay\Common\Message\RequestInterface refund(array $options = array())
  * @method \Omnipay\Common\Message\RequestInterface void(array $options = array())
  * @method \Omnipay\Common\Message\RequestInterface createCard(array $options = array())
  * @method \Omnipay\Common\Message\RequestInterface updateCard(array $options = array())
  * @method \Omnipay\Common\Message\RequestInterface deleteCard(array $options = array())
+ * @method \Omnipay\Common\Message\NotificationInterface acceptNotification(array $options = array())
+ * @method \Omnipay\Common\Message\RequestInterface fetchTransaction(array $options = [])
  */
 class ClientGateway extends AbstractGateway
 {
@@ -30,16 +31,30 @@ class ClientGateway extends AbstractGateway
 
     public function getDefaultParameters()
     {
-        return array (
-            'currency'      => 'USD',
+        return array(
+            'currency' => 'USD',
         );
+    }
+
+    public function authorize(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Dragonpay\Message\DragonpayAuthorizeRequest', $parameters);
+    }
+
+    public function purchase(array $parameters = array())
+    {
+        return $this->authorize($parameters);
+    }
+
+    public function completePurchase(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Dragonpay\Message\DragonpayCompletePurchaseRequest', $parameters);
     }
 
     public function setMerchantId($value)
     {
         return $this->setParameter('merchantId', $value);
     }
-
 
     public function getMerchantId()
     {
@@ -55,20 +70,4 @@ class ClientGateway extends AbstractGateway
     {
         return $this->getParameter('password');
     }
-
-    public function authorize(array $parameters = array())
-    {
-        return $this->createRequest('\Omnipay\Dragonpay\Message\DragonpayAuthorizeRequest', $parameters);
-    }
-
-    public function acceptNotification(array $parameters = array())
-    {
-        return $this->createRequest('\Omnipay\Dragonpay\Message\DragonpayNotificationRequest', $parameters);
-    }
-
-    public function purchase(array $parameters = array())
-    {
-        return $this->authorize($parameters);
-    }
-
 }

@@ -2,10 +2,6 @@
 
 namespace Omnipay\Dragonpay;
 
-/**
- * Class Helper
- * @package Omnipay\Dragonpay
- */
 class Helper
 {
     public static function generateHash($merchantId, $txnId, $amount, $currency, $description, $email, $secretKey)
@@ -23,5 +19,20 @@ class Helper
         $buffer = implode(':', $parts);
 
         return sha1($buffer);
+    }
+
+    public static function confirmDigest($digest, $txnId, $refno, $status, $message, $secretKey)
+    {
+        $parts = array(
+            $txnId,
+            $refno,
+            $status,
+            $message,
+            $secretKey
+        );
+
+        $internalDigest = sha1(implode(':', $parts));
+
+        return $internalDigest === $digest;
     }
 }

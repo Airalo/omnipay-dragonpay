@@ -42,6 +42,6 @@ class DragonpayAuthorizeResponse extends AbstractResponse implements RedirectRes
 
     public function getRedirectUrl()
     {
-        return $this->getCheckoutEndpoint() . '?' .http_build_query($this->getRedirectData(), '', '&');
+        return $this->getCheckoutEndpoint() . '?' . http_build_query($this->getRedirectData(), '', '&');
     }
 }

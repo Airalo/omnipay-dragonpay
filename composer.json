@@ -11,11 +11,6 @@
         "pay",
         "payment"
     ],
-    "authors": [
-        {
-            "name": "sahin"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Omnipay\\Dragonpay\\": "src/"

@@ -2,28 +2,20 @@
 
 namespace Omnipay\Dragonpay\Message;
 
-
 use Omnipay\Common\Message\ResponseInterface;
 use Omnipay\Dragonpay\Helper;
 
 class DragonpayAuthorizeRequest extends DragonpayAbstractRequest
 {
-
-    /**
-     * Get the raw data array for this message. The format of this varies from gateway to
-     * gateway, but will usually be either an associative array, or a SimpleXMLElement.
-     *
-     * @return mixed
-     */
     public function getData()
     {
-        $data = array (
-            'merchantId'    => $this->getMerchantId(),
-            'txnid'         => $this->getTxnid(),   // TXNID => Transaction idenfitify
-            'amount'        => number_format($this->getAmount(), '2', '.', ''),
-            'ccy'           => $this->getCurrency() ?? '',
-            'description'   => $this->getDescription() ?? '',
-            'email'         => $this->getEmail() ?? '',
+        $data = array(
+            'merchantId'  => $this->getMerchantId(),
+            'txnid'       => $this->getTxnid(),   // TXNID => Transaction idenfitify
+            'amount'      => number_format($this->getAmount(), '2', '.', ''),
+            'ccy'         => $this->getCurrency() ?? '',
+            'description' => $this->getDescription() ?? '',
+            'email'       => $this->getEmail() ?? '',
         );
 
         $data['digest'] = Helper::generateHash(
@@ -39,7 +31,6 @@ class DragonpayAuthorizeRequest extends DragonpayAbstractRequest
         return $data;
     }
 
-
     private function validateData()
     {
         $this->validate(
@@ -52,7 +43,6 @@ class DragonpayAuthorizeRequest extends DragonpayAbstractRequest
             'digest'
         );
     }
-
 
     /**
      * Send the request with specified data
@@ -94,6 +84,4 @@ class DragonpayAuthorizeRequest extends DragonpayAbstractRequest
     {
         return $this->getParameter('email');
     }
-
-
 }
