@@ -12,7 +12,6 @@ use Omnipay\Common\AbstractGateway;
  * @method \Omnipay\Common\Message\RequestInterface createCard(array $options = array())
  * @method \Omnipay\Common\Message\RequestInterface updateCard(array $options = array())
  * @method \Omnipay\Common\Message\RequestInterface deleteCard(array $options = array())
- * @method \Omnipay\Common\Message\NotificationInterface acceptNotification(array $options = array())
  * @method \Omnipay\Common\Message\RequestInterface fetchTransaction(array $options = [])
  */
 class ClientGateway extends AbstractGateway
@@ -49,6 +48,11 @@ class ClientGateway extends AbstractGateway
     public function completePurchase(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Dragonpay\Message\DragonpayCompletePurchaseRequest', $parameters);
+    }
+
+    public function acceptNotification(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Dragonpay\Message\DragonpayAcceptNotificationRequest', $parameters);
     }
 
     public function setMerchantId($value)
